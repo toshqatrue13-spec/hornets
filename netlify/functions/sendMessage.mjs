@@ -19,21 +19,14 @@ export const handler = async (event) => {
     });
 
     const data = await response.json();
-
-<<<<<<< HEAD
-   return {
+--fix
+ return {
   statusCode: 200,
   body: JSON.stringify({
     success: true,
     message: "sent"
   }),
 };
-=======
-    return {
-      statusCode: 200,
-      body: JSON.stringify({ success: true, telegram: data }),
-    };
->>>>>>> 77584c159bedbe7a1ca662c864b8698666dcdcd9
 
   } catch (error) {
     return {
