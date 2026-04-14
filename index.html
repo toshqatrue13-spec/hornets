@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hornets — Хімчистка авто</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <canvas id="bg-canvas"></canvas>
+
+  <!-- HEADER -->
+  <header>
+    <div class="container header-inner">
+      <a href="#" class="logo" aria-label="Hornets — на головну">
+        <svg class="logo-icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <ellipse cx="24" cy="26" rx="14" ry="10" fill="#F7A800"/>
+          <ellipse cx="24" cy="26" rx="14" ry="10" fill="url(#stripes)" opacity="0.6"/>
+          <ellipse cx="24" cy="20" rx="9" ry="7" fill="#F7A800"/>
+          <path d="M24 13 C22 8, 18 6, 16 9" stroke="#1a1a1a" stroke-width="1.5" stroke-linecap="round"/>
+          <path d="M24 13 C26 8, 30 6, 32 9" stroke="#1a1a1a" stroke-width="1.5" stroke-linecap="round"/>
+          <ellipse cx="19" cy="18" rx="2" ry="2.5" fill="#1a1a1a"/>
+          <ellipse cx="29" cy="18" rx="2" ry="2.5" fill="#1a1a1a"/>
+          <path d="M10 28 C6 25, 4 28, 6 31" stroke="#F7A800" stroke-width="2" fill="none" stroke-linecap="round"/>
+          <path d="M38 28 C42 25, 44 28, 42 31" stroke="#F7A800" stroke-width="2" fill="none" stroke-linecap="round"/>
+          <line x1="18" y1="32" x2="18" y2="38" stroke="#1a1a1a" stroke-width="1.5" stroke-linecap="round"/>
+          <line x1="24" y1="34" x2="24" y2="40" stroke="#1a1a1a" stroke-width="1.5" stroke-linecap="round"/>
+          <line x1="30" y1="32" x2="30" y2="38" stroke="#1a1a1a" stroke-width="1.5" stroke-linecap="round"/>
+          <defs>
+            <pattern id="stripes" patternUnits="userSpaceOnUse" width="4" height="4" patternTransform="rotate(45)">
+              <line x1="0" y1="0" x2="0" y2="4" stroke="#1a1a1a" stroke-width="2"/>
+            </pattern>
+          </defs>
+        </svg>
+        <span class="logo-text">HORNETS</span>
+      </a>
+
+      <!-- Burger button -->
+      <button class="burger" id="burger" aria-label="Меню" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <nav id="nav">
+        <a href="#cleaning">Хімчистка</a>
+        <a href="#polish">Полірування</a>
+        <a href="#cleaning" onclick="closeNav()">Хімчистка</a>
+        <a href="#polish" onclick="closeNav()">Полірування</a>
+        <a href="#calculator" onclick="closeNav()">Калькулятор</a>
+        <a href="#services" onclick="closeNav()">Послуги</a>
+        <a href="#contact" onclick="closeNav()">Контакти</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container hero-layout">
+      <div class="hero-content">
+        <div class="hero-tag">Хімчистка автомобілів</div>
+        <h1>Твоє авто<br/>знову як <span>нове</span></h1>
+        <p class="hero-sub">Професійна хімчистка салону та кузова — видаляємо будь-які забруднення, запахи та плями.</p>
+        <a href="#contact" class="btn">Записатись</a>
+      </div>
+
+      <!-- SVG CAR -->
+      <div class="hero-car">
+        <svg viewBox="0 0 520 260" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Glow under car -->
+          <ellipse cx="260" cy="230" rx="200" ry="18" fill="#F7A800" opacity="0.15"/>
+
+          <!-- Car body shadow -->
+          <ellipse cx="262" cy="225" rx="195" ry="12" fill="#000" opacity="0.4"/>
+
+          <!-- Main body bottom -->
+          <rect x="40" y="170" width="440" height="50" rx="8" fill="#1a1a1a"/>
+
+          <!-- Car body top (sedan shape) -->
+          <path d="M60 170 L100 120 Q130 88 175 82 L345 82 Q390 82 420 112 L460 170 Z"
+                fill="#222"/>
+
+          <!-- Roof highlight -->
+          <path d="M110 168 L140 122 Q165 96 200 90 L320 90 Q355 96 378 118 L415 168 Z"
+                fill="#2a2a2a"/>
+
+          <!-- Windshield -->
+          <path d="M150 165 L175 115 Q195 96 220 92 L300 92 Q325 96 342 115 L368 165 Z"
+                fill="#0d0d0d" opacity="0.9"/>
+          <path d="M155 162 L178 118 Q197 100 222 96 L298 96 Q323 100 340 118 L362 162 Z"
+                fill="#111" opacity="0.6"/>
+          <!-- Windshield glare -->
+          <path d="M175 118 Q195 100 218 96 L240 96 L210 162 L165 162 Z"
+                fill="white" opacity="0.04"/>
+
+          <!-- Left window -->
+          <path d="M108 165 L130 130 Q148 110 170 108 L200 108 L200 165 Z"
+                fill="#0d0d0d" opacity="0.85"/>
+          <!-- Right window -->
+          <path d="M412 165 L390 130 Q372 110 350 108 L320 108 L320 165 Z"
+                fill="#0d0d0d" opacity="0.85"/>
+
+          <!-- Door lines -->
+          <line x1="200" y1="108" x2="200" y2="170" stroke="#333" stroke-width="2"/>
+          <line x1="320" y1="108" x2="320" y2="170" stroke="#333" stroke-width="2"/>
+          <line x1="200" y1="165" x2="320" y2="165" stroke="#333" stroke-width="1.5"/>
+
+          <!-- Door handles -->
+          <rect x="215" y="148" width="22" height="5" rx="2.5" fill="#F7A800" opacity="0.8"/>
+          <rect x="325" y="148" width="22" height="5" rx="2.5" fill="#F7A800" opacity="0.8"/>
+
+          <!-- Side stripe / accent -->
+          <path d="M45 185 L475 185" stroke="#F7A800" stroke-width="2.5" opacity="0.6"/>
+
+          <!-- Front bumper -->
+          <path d="M40 195 Q30 200 28 210 L40 215 Z" fill="#1a1a1a"/>
+          <path d="M30 200 Q20 205 22 215 L38 218 Z" fill="#222"/>
+
+          <!-- Rear bumper -->
+          <path d="M480 195 Q490 200 492 210 L480 215 Z" fill="#1a1a1a"/>
+          <path d="M490 200 Q500 205 498 215 L482 218 Z" fill="#222"/>
+
+          <!-- Headlights (front) -->
+          <path d="M42 175 Q35 178 34 188 L55 188 L55 175 Z" fill="#F7A800" opacity="0.9"/>
+          <path d="M42 175 Q35 178 34 188 L55 188 L55 175 Z" fill="white" opacity="0.15"/>
+          <!-- Headlight glow -->
+          <ellipse cx="34" cy="182" rx="12" ry="8" fill="#F7A800" opacity="0.2"/>
+
+          <!-- Taillights (rear) -->
+          <path d="M458 175 Q465 178 466 188 L445 188 L445 175 Z" fill="#F7A800" opacity="0.7"/>
+
+          <!-- Front wheel arch -->
+          <path d="M75 220 Q75 175 125 172 Q175 172 175 220" fill="#111" stroke="#333" stroke-width="1.5"/>
+          <!-- Rear wheel arch -->
+          <path d="M340 220 Q340 175 390 172 Q440 172 440 220" fill="#111" stroke="#333" stroke-width="1.5"/>
+
+          <!-- Front wheel -->
+          <circle cx="125" cy="218" r="36" fill="#111" stroke="#F7A800" stroke-width="3"/>
+          <circle cx="125" cy="218" r="24" fill="#1a1a1a" stroke="#333" stroke-width="1.5"/>
+          <circle cx="125" cy="218" r="10" fill="#F7A800" opacity="0.9"/>
+          <!-- Spokes -->
+          <line x1="125" y1="194" x2="125" y2="242" stroke="#F7A800" stroke-width="2.5" opacity="0.7"/>
+          <line x1="101" y1="218" x2="149" y2="218" stroke="#F7A800" stroke-width="2.5" opacity="0.7"/>
+          <line x1="108" y1="201" x2="142" y2="235" stroke="#F7A800" stroke-width="2" opacity="0.5"/>
+          <line x1="142" y1="201" x2="108" y2="235" stroke="#F7A800" stroke-width="2" opacity="0.5"/>
+
+          <!-- Rear wheel -->
+          <circle cx="390" cy="218" r="36" fill="#111" stroke="#F7A800" stroke-width="3"/>
+          <circle cx="390" cy="218" r="24" fill="#1a1a1a" stroke="#333" stroke-width="1.5"/>
+          <circle cx="390" cy="218" r="10" fill="#F7A800" opacity="0.9"/>
+          <!-- Spokes -->
+          <line x1="390" y1="194" x2="390" y2="242" stroke="#F7A800" stroke-width="2.5" opacity="0.7"/>
+          <line x1="366" y1="218" x2="414" y2="218" stroke="#F7A800" stroke-width="2.5" opacity="0.7"/>
+          <line x1="373" y1="201" x2="407" y2="235" stroke="#F7A800" stroke-width="2" opacity="0.5"/>
+          <line x1="407" y1="201" x2="373" y2="235" stroke="#F7A800" stroke-width="2" opacity="0.5"/>
+
+          <!-- Exhaust -->
+          <rect x="462" y="208" width="20" height="8" rx="4" fill="#333" stroke="#555" stroke-width="1"/>
+          <!-- Exhaust smoke -->
+          <circle cx="492" cy="210" r="5" fill="#555" opacity="0.3"/>
+          <circle cx="502" cy="206" r="4" fill="#555" opacity="0.2"/>
+          <circle cx="510" cy="202" r="3" fill="#555" opacity="0.1"/>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- CLEANING SECTION -->
+  <section class="detail-section" id="cleaning">
+    <div class="container">
+      <div class="detail-header">
+        <h2 class="section-title">Хімчистка салону</h2>
+      </div>
+      <div class="detail-layout">
+        <div class="detail-text">
+          <p class="detail-lead">Повне відновлення чистоти салону — від килимків до стелі. Прибираємо те, що здається неможливим.</p>
+          <div class="detail-steps">
+            <div class="step">
+              <span class="step-num">1</span>
+              <div>
+                <h4>Попередня обробка</h4>
+                <p>Нанесення засобів для розм'якшення забруднень на тканини, шкіру та пластик.</p>
+              </div>
+            </div>
+            <div class="step">
+              <span class="step-num">2</span>
+              <div>
+                <h4>Механічне очищення</h4>
+                <p>Чищення щітками та екстракторним апаратом — глибоке прання тканинних поверхонь.</p>
+              </div>
+            </div>
+            <div class="step">
+              <span class="step-num">3</span>
+              <div>
+                <h4>Сушка та фінальна обробка</h4>
+                <p>Прискорена сушка, нанесення кондиціонера для шкіри та антистатика для пластику.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="detail-items">
+          <div class="detail-item">
+            <span class="di-icon">🪑</span>
+            <span>Сидіння та підголовники</span>
+          </div>
+          <div class="detail-item">
+            <span class="di-icon">🏠</span>
+            <span>Стеля та стійки</span>
+          </div>
+          <div class="detail-item">
+            <span class="di-icon">🟫</span>
+            <span>Килимки та підлога</span>
+          </div>
+          <div class="detail-item">
+            <span class="di-icon">🎛️</span>
+            <span>Пластик та торпеда</span>
+          </div>
+          <div class="detail-item">
+            <span class="di-icon">🚪</span>
+            <span>Дверні карти</span>
+          </div>
+          <div class="detail-item">
+            <span class="di-icon">💨</span>
+            <span>Видалення запахів</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- POLISH SECTION -->
+  <section class="detail-section alt" id="polish">
+    <div class="container">
+      <div class="detail-header">
+        <h2 class="section-title">Полірування кузова</h2>
+      </div>
+      <div class="detail-layout reverse">
+        <div class="detail-text">
+          <p class="detail-lead">Повертаємо кузову дзеркальний блиск — прибираємо павутинки, подряпини та окислення лаку.</p>
+          <div class="detail-steps">
+            <div class="step">
+              <span class="step-num">1</span>
+              <div>
+                <h4>Детейлінг-мийка</h4>
+                <p>Глибока передполірувальна мийка з видаленням залізного пилу та бітуму з кузова.</p>
+              </div>
+            </div>
+            <div class="step">
+              <span class="step-num">2</span>
+              <div>
+                <h4>Машинне полірування</h4>
+                <p>Одно- або двоступеневе полірування орбітальною або ротаційною машинкою залежно від стану лаку.</p>
+              </div>
+            </div>
+            <div class="step">
+              <span class="step-num">3</span>
+              <div>
+                <h4>Захист покриття</h4>
+                <p>Нанесення захисного воску, кварцового герметика або керамічного покриття для тривалого ефекту.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="detail-items">
+          <div class="detail-item">
+            <span class="di-icon">🔦</span>
+            <span>Корекція лаку</span>
+          </div>
+          <div class="detail-item">
+            <span class="di-icon">🪞</span>
+            <span>Дзеркальний блиск</span>
+          </div>
+          <div class="detail-item">
+            <span class="di-icon">🛡️</span>
+            <span>Керамічне покриття</span>
+          </div>
+          <div class="detail-item">
+            <span class="di-icon">🌧️</span>
+            <span>Гідрофобний ефект</span>
+          </div>
+          <div class="detail-item">
+            <span class="di-icon">🚘</span>
+            <span>Полірування фар</span>
+          </div>
+          <div class="detail-item">
+            <span class="di-icon">⚡</span>
+            <span>Експрес-детейлінг</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CALCULATOR -->
+  <section class="calc-section" id="calculator">
+    <div class="container">
+      <h2 class="section-title">Калькулятор вартості</h2>
+      <p class="calc-sub">Оберіть марку, тип кузова та послугу — отримайте орієнтовну вартість</p>
+
+      <div class="calc-wrap">
+
+        <!-- STEP 1: BRAND -->
+        <div class="calc-step">
+          <div class="calc-step-label"><span class="step-num">1</span> Марка автомобіля</div>
+
+          <!-- search + dropdown in ONE relative wrapper -->
+          <div class="brand-box">
+            <div class="brand-search-row">
+              <input type="text" id="brand-search" class="brand-input" placeholder="🔍  Почніть вводити марку..." autocomplete="off"/>
+              <button type="button" id="brand-clear" class="brand-clear" style="display:none">✕</button>
+            </div>
+            <!-- dropdown is INSIDE brand-box so absolute works -->
+            <div id="brand-dropdown" class="brand-dropdown"></div>
+          </div>
+
+          <div id="brand-popular" class="brand-chips"></div>
+
+          <div id="brand-selected" class="brand-selected-tag" style="display:none">
+            <span id="brand-selected-name"></span>
+            <button type="button" id="brand-deselect" class="brand-deselect" title="Скинути">✕</button>
+          </div>
+        </div>
+
+        <!-- STEP 2: BODY TYPE -->
+        <div class="calc-step">
+          <div class="calc-step-label"><span class="step-num">2</span> Тип кузова</div>
+          <div class="calc-options" id="car-options">
+            <button class="calc-opt" data-mul="1.0">
+              <span class="opt-icon">🚗</span>
+              <span class="opt-name">Хетчбек</span>
+            </button>
+            <button class="calc-opt" data-mul="1.1">
+              <span class="opt-icon">🚙</span>
+              <span class="opt-name">Седан</span>
+            </button>
+            <button class="calc-opt" data-mul="1.35">
+              <span class="opt-icon">🚐</span>
+              <span class="opt-name">Кросовер</span>
+            </button>
+            <button class="calc-opt" data-mul="1.6">
+              <span class="opt-icon">🛻</span>
+              <span class="opt-name">Позашляховик</span>
+            </button>
+            <button class="calc-opt" data-mul="1.8">
+              <span class="opt-icon">🚌</span>
+              <span class="opt-name">Мінівен</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- STEP 3: SERVICE -->
+        <div class="calc-step">
+          <div class="calc-step-label"><span class="step-num">3</span> Тип послуги</div>
+          <div class="calc-options" id="service-options">
+            <button class="calc-opt wide" data-base="1200">
+              <span class="opt-icon">🧹</span>
+              <div>
+                <span class="opt-name">Хімчистка салону</span>
+                <span class="opt-desc">Стандарт — сидіння, килимки, пластик</span>
+              </div>
+            </button>
+            <button class="calc-opt wide" data-base="2400">
+              <span class="opt-icon">✨</span>
+              <div>
+                <span class="opt-name">Хімчистка салону</span>
+                <span class="opt-desc">Преміум — повна + стеля + двері</span>
+              </div>
+            </button>
+            <button class="calc-opt wide" data-base="1800">
+              <span class="opt-icon">🔦</span>
+              <div>
+                <span class="opt-name">Полірування кузова</span>
+                <span class="opt-desc">Одноступеневе — видалення подряпин</span>
+              </div>
+            </button>
+            <button class="calc-opt wide" data-base="3000">
+              <span class="opt-icon">🪞</span>
+              <div>
+                <span class="opt-name">Полірування кузова</span>
+                <span class="opt-desc">Двоступеневе — корекція + фінішне</span>
+              </div>
+            </button>
+            <button class="calc-opt wide" data-base="2500">
+              <span class="opt-icon">🛡️</span>
+              <div>
+                <span class="opt-name">Захисне покриття</span>
+                <span class="opt-desc">Кварцовий герметик або кераміка</span>
+              </div>
+            </button>
+            <button class="calc-opt wide" data-base="600">
+              <span class="opt-icon">💨</span>
+              <div>
+                <span class="opt-name">Озонування</span>
+                <span class="opt-desc">Нейтралізація запахів</span>
+              </div>
+            </button>
+            <button class="calc-opt wide" data-base="4200">
+              <span class="opt-icon">🏆</span>
+              <div>
+                <span class="opt-name">Комплекс</span>
+                <span class="opt-desc">Хімчистка + полірування + захист</span>
+              </div>
+            </button>
+          </div>
+        </div>
+
+        <!-- RESULT -->
+        <div class="calc-result" id="calc-result">
+          <div class="result-top-row">
+            <div class="result-label">Орієнтовна вартість</div>
+            <div class="currency-switcher">
+              <button type="button" class="cur-btn active" data-cur="UAH">₴ UAH</button>
+              <button type="button" class="cur-btn" data-cur="USD">$ USD</button>
+              <button type="button" class="cur-btn" data-cur="EUR">€ EUR</button>
+            </div>
+          </div>
+          <div class="result-price" id="result-price">—</div>
+          <div class="result-breakdown" id="result-breakdown"></div>
+          <div class="result-tier" id="result-tier"></div>
+          <div class="result-note">Точна ціна після огляду автомобіля</div>
+          <div class="result-actions">
+            <a href="#contact" class="btn" id="calc-order-btn" style="display:none">Записатись за цією ціною</a>
+            <button type="button" class="btn-reset" id="calc-reset" style="display:none">↺ Очистити</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES GRID -->
+  <section class="services" id="services">
+    <div class="container">
+      <h2 class="section-title">Всі послуги</h2>
+      <div class="cards">
+        <div class="card">
+          <div class="card-icon">🚗</div>
+          <h3>Хімчистка салону</h3>
+          <p>Глибоке очищення сидінь, килимків, стелі та пластику. Видаляємо будь-які плями і стійкі забруднення.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">✨</div>
+          <h3>Полірування кузова</h3>
+          <p>Усуваємо подряпини, потертості та матовість. Лакофарбове покриття сяє як з салону.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">🛡️</div>
+          <h3>Захисне покриття</h3>
+          <p>Нанесення захисної кераміки або воску — довготривалий захист кузова від бруду та впливу середовища.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">💨</div>
+          <h3>Озонування</h3>
+          <p>Знищуємо неприємні запахи (цигарковий дим, тварини, вологість) озоновою обробкою салону.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="about" id="about">
+    <div class="container about-inner">
+      <div class="about-text">
+        <h2 class="section-title">Чому Hornets?</h2>
+        <ul class="checklist">
+          <li>Понад 5 років досвіду в хімчистці автомобілів</li>
+          <li>Професійна хімія — безпечна для салону і здоров'я</li>
+          <li>Зручно: приїдь або викличи майстра на місце</li>
+          <li>Гарантія результату або повернення коштів</li>
+          <li>Програма лояльності та знижки постійним клієнтам</li>
+        </ul>
+      </div>
+      <div class="about-badge">
+        <div class="badge">
+          <span class="badge-num">5+</span>
+          <span class="badge-label">років досвіду</span>
+        </div>
+        <div class="badge">
+          <span class="badge-num">1000+</span>
+          <span class="badge-label">авто оброблено</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact" id="contact">
+    <div class="container">
+      <h2 class="section-title">Записатись</h2>
+      <p class="contact-sub">Залиште заявку і ми передзвонимо вам протягом 15 хвилин</p>
+      <div class="contact-layout">
+      <form class="contact-form" id="order-form">
+        <input id="f-name"  type="text" placeholder="Ваше ім'я" required />
+        <input id="f-phone" type="tel"  placeholder="Номер телефону" required />
+        <textarea id="f-note" placeholder="Марка авто та що потрібно зробити?" rows="4"></textarea>
+        <button type="submit" class="btn"><span id="btn-text">Надіслати заявку</span></button>
+        <div id="form-msg" class="form-msg" style="display:none"></div>
+      </form>
+
+      <div class="map-wrap">
+        <iframe
+          src="https://maps.google.com/maps?q=Полтава,Україна&z=13&output=embed"
+          width="100%"
+          height="100%"
+          style="border:0;"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          title="Hornets — Полтава"
+        ></iframe>
+      </div>
+
+      </div><!-- /.contact-layout -->
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container footer-inner">
+      <div class="logo">
+        <svg class="logo-icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <ellipse cx="24" cy="26" rx="14" ry="10" fill="#F7A800"/>
+          <ellipse cx="24" cy="26" rx="14" ry="10" fill="url(#stripes_f)" opacity="0.6"/>
+          <ellipse cx="24" cy="20" rx="9" ry="7" fill="#F7A800"/>
+          <path d="M24 13 C22 8, 18 6, 16 9" stroke="#1a1a1a" stroke-width="1.5" stroke-linecap="round"/>
+          <path d="M24 13 C26 8, 30 6, 32 9" stroke="#1a1a1a" stroke-width="1.5" stroke-linecap="round"/>
+          <ellipse cx="19" cy="18" rx="2" ry="2.5" fill="#1a1a1a"/>
+          <ellipse cx="29" cy="18" rx="2" ry="2.5" fill="#1a1a1a"/>
+          <line x1="18" y1="32" x2="18" y2="38" stroke="#1a1a1a" stroke-width="1.5" stroke-linecap="round"/>
+          <line x1="24" y1="34" x2="24" y2="40" stroke="#1a1a1a" stroke-width="1.5" stroke-linecap="round"/>
+          <line x1="30" y1="32" x2="30" y2="38" stroke="#1a1a1a" stroke-width="1.5" stroke-linecap="round"/>
+          <defs>
+            <pattern id="stripes_f" patternUnits="userSpaceOnUse" width="4" height="4" patternTransform="rotate(45)">
+              <line x1="0" y1="0" x2="0" y2="4" stroke="#1a1a1a" stroke-width="2"/>
+            </pattern>
+          </defs>
+        </svg>
+        <span class="logo-text small">HORNETS</span>
+      </div>
+      <a class="social-link" href="https://www.instagram.com/dziubuch_1?igsh=YWx5cGc1cnlzbDh1" target="_blank" rel="noopener" aria-label="Instagram">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="2" y="2" width="20" height="20" rx="5.5" stroke="#F7A800" stroke-width="2"/>
+          <circle cx="12" cy="12" r="4.5" stroke="#F7A800" stroke-width="2"/>
+          <circle cx="17.5" cy="6.5" r="1.2" fill="#F7A800"/>
+        </svg>
+        <span>@dziubuch_1</span>
+      </a>
+      <span>© 2026 Hornets. Всі права захищені.</span>
+    </div>
+  </footer>
+
+  <script src="bg.js"></script>
+  <script src="bee.js"></script>
+  <script src="calculator.js"></script>
+  <script src="telegram.js"></script>
+  <script>
+    const burger = document.getElementById('burger');
+    const nav = document.getElementById('nav');
+
+    burger.addEventListener('click', () => {
+      const open = nav.classList.toggle('open');
+      burger.classList.toggle('active', open);
+      burger.setAttribute('aria-expanded', open);
+    });
+
+    function closeNav() {
+      nav.classList.remove('open');
+      burger.classList.remove('active');
+      burger.setAttribute('aria-expanded', false);
+    }
+
+    // Close on outside click
+    document.addEventListener('click', (e) => {
+      if (!nav.contains(e.target) && !burger.contains(e.target)) {
+        closeNav();
+      }
+    });
+  </script>
+
+  <script>
+document.getElementById("order-form").addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  const name = document.getElementById("f-name").value;
+  const phone = document.getElementById("f-phone").value;
+  const note = document.getElementById("f-note").value;
+
+  const message = `
+Нова заявка:
+Ім'я: ${name}
+Телефон: ${phone}
+Коментар: ${note}
+`;
+
+  try {
+    await fetch("/.netlify/functions/sendMessage", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ message })
+    });
+
+    const msg = document.getElementById("form-msg");
+    msg.style.display = "block";
+    msg.innerText = "Заявка відправлена ✅";
+
+  } catch (err) {
+    const msg = document.getElementById("form-msg");
+    msg.style.display = "block";
+    msg.innerText = "Помилка ❌";
+  }
+});
+</script>
+
+</body>
+</html>
