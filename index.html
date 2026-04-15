@@ -630,5 +630,37 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 </script>
 
+  <script>
+document.addEventListener('DOMContentLoaded', function () {
+  const form = document.getElementById('order-form');
+  const msg = document.getElementById('form-msg');
+  const btn = document.getElementById('btn-text');
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault(); // ❗ головне
+
+    msg.style.display = 'block';
+    msg.innerText = 'Відправляємо заявку...';
+
+    fetch(form.action, {
+      method: 'POST',
+      body: new FormData(form),
+      headers: { 'Accept': 'application/json' }
+    })
+    .then(response => {
+      if (response.ok) {
+        form.reset();
+        msg.innerText = 'Заявка успішно відправлена ✅';
+      } else {
+        msg.innerText = 'Помилка відправки ❌';
+      }
+    })
+    .catch(() => {
+      msg.innerText = 'Помилка з’єднання ❌';
+    });
+  });
+});
+</script>
+
 </body>
 </html>
