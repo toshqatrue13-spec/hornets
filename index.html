@@ -639,13 +639,17 @@ document.addEventListener('DOMContentLoaded', function () {
     e.preventDefault();
 
     msg.style.display = 'block';
-    msg.innerText = 'Відправляємо...';
+    msg.innerText = 'Відправляємо заявку...';
+
+    const formData = new FormData(form);
 
     try {
       const res = await fetch(form.action, {
         method: 'POST',
-        body: new FormData(form),
-        headers: { 'Accept': 'application/json' }
+        body: formData, // 🔥 ОЦЕ ГОЛОВНЕ
+        headers: {
+          'Accept': 'application/json'
+        }
       });
 
       if (res.ok) {
@@ -653,11 +657,11 @@ document.addEventListener('DOMContentLoaded', function () {
         msg.innerText = 'Заявка успішно відправлена ✅';
       } else {
         const data = await res.json();
-        msg.innerText = data?.error || 'Помилка відправки ❌';
+        msg.innerText = data.error || 'Помилка відправки ❌';
       }
 
     } catch (err) {
-      msg.innerText = 'Немає з’єднання ❌';
+      msg.innerText = 'Помилка з’єднання ❌';
     }
   });
 });
