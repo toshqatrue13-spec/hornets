@@ -489,13 +489,21 @@
       <h2 class="section-title">Записатись</h2>
       <p class="contact-sub">Залиште заявку і ми передзвонимо вам протягом 15 хвилин</p>
       <div class="contact-layout">
-      <form class="contact-form" id="order-form">
-        <input id="f-name"  type="text" placeholder="Ваше ім'я" required />
-        <input id="f-phone" type="tel"  placeholder="Номер телефону" required />
-        <textarea id="f-note" placeholder="Марка авто та що потрібно зробити?" rows="4"></textarea>
-        <button type="submit" class="btn"><span id="btn-text">Надіслати заявку</span></button>
-        <div id="form-msg" class="form-msg" style="display:none"></div>
-      </form>
+    <form 
+  class="contact-form" 
+  id="order-form"
+  action="https://formspree.io/f/mrerepae"
+  method="POST"
+>
+  <input name="name" type="text" placeholder="Ваше ім'я" required />
+  <input name="phone" type="tel" placeholder="Номер телефону" required />
+  <textarea name="message" placeholder="Марка авто та що потрібно зробити?" rows="4"></textarea>
+
+  <button type="submit" class="btn">
+    <span id="btn-text">Надіслати заявку</span>
+  </button>
+  <div id="form-msg" class="form-msg" style="display:none"></div>
+</form>
 
       <div class="map-wrap">
         <iframe
