@@ -610,9 +610,15 @@ document.getElementById("order-form").addEventListener("submit", async (e) => {
 });
 </script>
 
-  <script>
-document.getElementById('order-form').addEventListener('submit', function() {
-  this.reset();
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  const form = document.getElementById('order-form');
+
+  if (form) {
+    form.addEventListener('submit', function () {
+      this.reset();
+    });
+  }
 });
 </script>
 
