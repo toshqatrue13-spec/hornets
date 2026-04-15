@@ -630,34 +630,35 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 </script>
 
-  <script>
+<script>
 document.addEventListener('DOMContentLoaded', function () {
   const form = document.getElementById('order-form');
   const msg = document.getElementById('form-msg');
-  const btn = document.getElementById('btn-text');
 
-  form.addEventListener('submit', function (e) {
-    e.preventDefault(); // ❗ головне
+  form.addEventListener('submit', async function (e) {
+    e.preventDefault();
 
     msg.style.display = 'block';
-    msg.innerText = 'Відправляємо заявку...';
+    msg.innerText = 'Відправляємо...';
 
-    fetch(form.action, {
-      method: 'POST',
-      body: new FormData(form),
-      headers: { 'Accept': 'application/json' }
-    })
-    .then(response => {
-      if (response.ok) {
+    try {
+      const res = await fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { 'Accept': 'application/json' }
+      });
+
+      if (res.ok) {
         form.reset();
         msg.innerText = 'Заявка успішно відправлена ✅';
       } else {
-        msg.innerText = 'Помилка відправки ❌';
+        const data = await res.json();
+        msg.innerText = data?.error || 'Помилка відправки ❌';
       }
-    })
-    .catch(() => {
-      msg.innerText = 'Помилка з’єднання ❌';
-    });
+
+    } catch (err) {
+      msg.innerText = 'Немає з’єднання ❌';
+    }
   });
 });
 </script>
