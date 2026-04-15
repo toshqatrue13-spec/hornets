@@ -489,20 +489,12 @@
       <h2 class="section-title">Записатись</h2>
       <p class="contact-sub">Залиште заявку і ми передзвонимо вам протягом 15 хвилин</p>
       <div class="contact-layout">
-    <form 
-  class="contact-form" 
-  id="order-form"
-  action="https://formspree.io/f/mrerepae"
-  method="POST"
->
-  <input name="name" type="text" placeholder="Ваше ім'я" required />
-  <input name="phone" type="tel" placeholder="Номер телефону" required />
-  <textarea name="message" placeholder="Марка авто та що потрібно зробити?" rows="4"></textarea>
+   <form action="https://formspree.io/f/mrerepae" method="POST">
+  <input name="name" type="text" required />
+  <input name="phone" type="tel" required />
+  <textarea name="message"></textarea>
 
-  <button type="submit" class="btn">
-    <span id="btn-text">Надіслати заявку</span>
-  </button>
-  <div id="form-msg" class="form-msg" style="display:none"></div>
+  <button type="submit">Send</button>
 </form>
 
       <div class="map-wrap">
@@ -584,88 +576,7 @@
     });
   </script>
 
-  <script>
-document.getElementById("order-form").addEventListener("submit", async (e) => {
-  e.preventDefault();
 
-  const name = document.getElementById("f-name").value;
-  const phone = document.getElementById("f-phone").value;
-  const note = document.getElementById("f-note").value;
-
-  const message = `
-Нова заявка:
-Ім'я: ${name}
-Телефон: ${phone}
-Коментар: ${note}
-`;
-
-  try {
-    await fetch("/.netlify/functions/sendMessage", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ message })
-    });
-
-    const msg = document.getElementById("form-msg");
-    msg.style.display = "block";
-    msg.innerText = "Заявка відправлена ✅";
-
-  } catch (err) {
-    const msg = document.getElementById("form-msg");
-    msg.style.display = "block";
-    msg.innerText = "Помилка ❌";
-  }
-});
-</script>
-
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-  const form = document.getElementById('order-form');
-
-  if (form) {
-    form.addEventListener('submit', function () {
-      this.reset();
-    });
-  }
-});
-</script>
-
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-  const form = document.getElementById('order-form');
-  const msg = document.getElementById('form-msg');
-
-  form.addEventListener('submit', async function (e) {
-    e.preventDefault();
-
-    msg.style.display = 'block';
-    msg.innerText = 'Відправляємо заявку...';
-
-    const formData = new FormData(form);
-
-    try {
-      const res = await fetch(form.action, {
-        method: 'POST',
-        body: formData, // 🔥 ОЦЕ ГОЛОВНЕ
-        headers: {
-          'Accept': 'application/json'
-        }
-      });
-
-      if (res.ok) {
-        form.reset();
-        msg.innerText = 'Заявка успішно відправлена ✅';
-      } else {
-        const data = await res.json();
-        msg.innerText = data.error || 'Помилка відправки ❌';
-      }
-
-    } catch (err) {
-      msg.innerText = 'Помилка з’єднання ❌';
-    }
-  });
-});
-</script>
 
 </body>
 </html>
